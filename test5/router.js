@@ -1,9 +1,11 @@
-function route(_config, _pathname){
+function route(_config, _pathname, _response){
     
     if ( typeof _config[_pathname] === 'function'){
-        return _config[_pathname]();
+        return _config[_pathname](_response);
     }else{
-        return "404 Not found";
+       _response.writeHead( 404 , {"Content-Type" : "text/html"});
+       _response.write("Not found");
+       _response.end();
     };
 };
 
